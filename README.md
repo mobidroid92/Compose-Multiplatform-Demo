@@ -5,6 +5,9 @@ Becuase UI is 100% shared across platforms(Zero code written on IOS project), we
 
 ## App Content
 This app will show a list of characters (Name and Image) of the television show Rick and Morty. 
+
+![](Screenshot.png)
+
 ## This app has the following functionalities:
 - Pagination by page number
 - Pull to refresh.
