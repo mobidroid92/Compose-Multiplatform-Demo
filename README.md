@@ -54,7 +54,7 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 - [Coroutine](https://github.com/Kotlin/kotlinx.coroutines): to request data from server on thread other than UI thread. 
 - [Ktor](https://ktor.io/docs/getting-started-ktor-client.html): to make api calls.
 - [Kotlinx-Serialization](https://github.com/Kotlin/kotlinx.serialization): to deserialize api response. 
-- [Image Loader](https://github.com/qdsfdhvh/compose-imageloader): to load images from url.
+- [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader): to load images from url.
 
 ## Disclaimer
 - Project configurations is based on this [template](https://github.com/JetBrains/compose-multiplatform-ios-android-template#readme)
