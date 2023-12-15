@@ -61,7 +61,7 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 - Kindly note that Compose Multiplatform is still in alpha, so it is subject to change and may require manual migration proceess when it is released.
 
 ## Let me know!
-If you have any questions or suggestion please contact me on mobidroid92@gmail.com
+If you have any questions or suggestion please contact me on malbdour92@gmail.com
 
 ## About
 Find me on LinkedIn: https://www.linkedin.com/in/mobidroid92/
