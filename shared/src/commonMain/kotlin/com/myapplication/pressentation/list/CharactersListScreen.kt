@@ -38,7 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.myapplication.providers.getCharactersListViewModel
 import com.myapplication.pressentation.uiModels.CharacterUiModel
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 
 @Composable
 fun CharactersListScreen() {
@@ -187,7 +187,7 @@ private fun CharacterItem(model: CharacterUiModel) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = rememberAsyncImagePainter(model.image),
+            painter = rememberImagePainter(model.image),
             contentDescription = null,
             modifier = Modifier
                 .padding(start = 16.dp)

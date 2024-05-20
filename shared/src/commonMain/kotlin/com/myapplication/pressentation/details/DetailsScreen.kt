@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 
 @Composable
 fun DetailsScreen(
@@ -47,7 +47,7 @@ private fun RenderTitle(name: String) {
 private fun RenderImage(image: String) {
     CompositionLocalProvider {
         Image(
-            painter = rememberAsyncImagePainter(image),
+            painter = rememberImagePainter(image),
             contentDescription = null,
             modifier = Modifier
                 .padding(top = 20.dp)

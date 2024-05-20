@@ -1,17 +1,18 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
-    id("org.jetbrains.compose")
-    kotlin("plugin.serialization") version "1.8.20"
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.cocoapods)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
-    android()
 
-    iosX64()
+    androidTarget()
     iosArm64()
     iosSimulatorArm64()
+
+    task("testClasses")
 
     cocoapods {
         version = "1.0.0"
@@ -23,71 +24,48 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
-    val KTOR_VERSION = "2.3.0"
-    val COROUTINE_VERSION = "1.6.4"
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+        commonMain.dependencies {
+            //Compose
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            api(compose.components.resources)
 
-                //Compose
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.material)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                api(compose.components.resources)
+            //Coroutine
+            api(libs.kotlinx.coroutines.core)
 
-                //Coroutine
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE_VERSION")
+            //Ktor
+            implementation(libs.ktor.core )
+            implementation(libs.ktor.negotiation)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.logging)
 
-                //Ktor
-                implementation("io.ktor:ktor-client-core:$KTOR_VERSION" )
-                implementation("io.ktor:ktor-client-content-negotiation:$KTOR_VERSION")
-                implementation("io.ktor:ktor-client-logging:$KTOR_VERSION")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$KTOR_VERSION")
-                implementation("ch.qos.logback:logback-classic:1.2.11")
+            //Kotlinx-Serialization
+            api(libs.kotlinx.serialization.json)
 
-                //Kotlinx-Serialization
-                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+            //Image Loader
+            api(libs.image.loader)
 
-                //Image Loader
-                api("io.github.qdsfdhvh:image-loader:1.4.2")
-
-            }
         }
-        val androidMain by getting {
-            dependencies {
+        androidMain.dependencies {
+            //Coroutine
+            api(libs.kotlinx.coroutines.android)
 
-                //Coroutine
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINE_VERSION")
+            //Views
+            api(libs.androidx.activity.compose)
+            api(libs.androidx.appcompat)
+            api(libs.androidx.core)
 
-                //Views
-                api("androidx.activity:activity-compose:1.6.1")
-                api("androidx.appcompat:appcompat:1.6.1")
-                api("androidx.core:core-ktx:1.9.0")
-
-                //Ktor
-                implementation("io.ktor:ktor-client-cio:$KTOR_VERSION")
-
-                //Volley
-                implementation ("com.android.volley:volley:1.2.1")
-
-            }
+            //Ktor
+            implementation(libs.ktor.client.cio)
         }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                //Ktor
-                implementation("io.ktor:ktor-client-darwin:$KTOR_VERSION")
-            }
+        iosMain.dependencies {
+            //Ktor
+            implementation(libs.ktor.darwin)
         }
     }
 }
@@ -99,16 +77,19 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+    sourceSets["main"].res.srcDirs("src/commonMain/composeResources", "src/androidMain/res")
 
     defaultConfig {
         minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlin {
-        jvmToolchain(11)
+        jvmToolchain(17)
     }
 }
