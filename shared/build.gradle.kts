@@ -39,10 +39,7 @@ kotlin {
             api(libs.kotlinx.coroutines.core)
 
             //Ktor
-            implementation(libs.ktor.core )
-            implementation(libs.ktor.negotiation)
-            implementation(libs.ktor.serialization)
-            implementation(libs.ktor.logging)
+            implementation(libs.bundles.ktor.common)
 
             //Kotlinx-Serialization
             api(libs.kotlinx.serialization.json)
@@ -56,9 +53,7 @@ kotlin {
             api(libs.kotlinx.coroutines.android)
 
             //Views
-            api(libs.androidx.activity.compose)
-            api(libs.androidx.appcompat)
-            api(libs.androidx.core)
+            api(libs.bundles.androidx)
 
             //Ktor
             implementation(libs.ktor.client.cio)
