@@ -13,6 +13,7 @@ This app will show a list of characters (Name and Image) of the television show 
 - Pull to refresh.
 - Loading item inside the list during the api request.
 - Error item inside the list if api request failed that include a retry button.
+- VersionCatalog to manage dependencies.
 
 
 ## Setup
