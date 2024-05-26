@@ -1,5 +1,6 @@
 package com.myapplication.pressentation.list
 
+import androidx.lifecycle.ViewModel
 import com.myapplication.model.dto.toCharacterUiModelList
 import com.myapplication.model.dataSource.CharactersPaginator
 import com.myapplication.model.repostries.CharactersRepository
@@ -14,7 +15,7 @@ class CharactersListViewModel(
     charactersRepository: CharactersRepository,
     private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher
-) {
+) : ViewModel() {
 
     private val _state = MutableStateFlow(CharactersListUiState())
     val state = _state.asStateFlow()

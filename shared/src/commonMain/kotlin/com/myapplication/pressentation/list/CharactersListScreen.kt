@@ -36,14 +36,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.myapplication.providers.getCharactersListViewModel
+import com.myapplication.providers.koinViewModel
 import com.myapplication.pressentation.uiModels.CharacterUiModel
 import com.seiko.imageloader.rememberImagePainter
 
 @Composable
 fun CharactersListScreen() {
 
-    val viewModel: CharactersListViewModel = getCharactersListViewModel()
+    val viewModel = koinViewModel<CharactersListViewModel>()
+
     val state = viewModel.state.collectAsState()
     val title = "Compose Multiplatform"
 

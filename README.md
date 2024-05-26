@@ -55,6 +55,8 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 - [Ktor](https://ktor.io/docs/getting-started-ktor-client.html): to make api calls.
 - [Kotlinx-Serialization](https://github.com/Kotlin/kotlinx.serialization): to deserialize api response. 
 - [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader): to load images from url.
+- [Koin](https://github.com/InsertKoinIO/koin): to inject dependencies (DI).
+- [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) to have Google's implementation of ViewModel.
 
 ## Disclaimer
 - Project configurations is based on this [template](https://github.com/JetBrains/compose-multiplatform-ios-android-template#readme)

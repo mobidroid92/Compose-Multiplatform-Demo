@@ -1,7 +1,9 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 kotlin {
@@ -35,5 +37,8 @@ android {
     }
     kotlin {
         jvmToolchain(17)
+    }
+    dependencies {
+        //Nothing
     }
 }

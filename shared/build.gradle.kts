@@ -1,9 +1,11 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.cocoapods)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose)
-    alias(libs.plugins.serialization)
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 kotlin {
@@ -29,14 +31,15 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             //Compose
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            api(compose.components.resources)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
             //Coroutine
-            api(libs.kotlinx.coroutines.core)
+            api(libs.coroutines.core)
 
             //Ktor
             implementation(libs.bundles.ktor.common)
@@ -47,20 +50,32 @@ kotlin {
             //Image Loader
             api(libs.image.loader)
 
+            //ViewModel
+            implementation(libs.bundles.lifecycle)
+
+            //Koin
+            implementation(libs.bundles.koin.common)
+
         }
         androidMain.dependencies {
             //Coroutine
-            api(libs.kotlinx.coroutines.android)
+            api(libs.coroutines.android)
 
             //Views
             api(libs.bundles.androidx)
 
             //Ktor
             implementation(libs.ktor.client.cio)
+
+            //Koin
+            implementation(libs.koin.android)
+
+            //Preview
+            implementation(libs.compose.ui.tooling.preview)
         }
         iosMain.dependencies {
             //Ktor
-            implementation(libs.ktor.darwin)
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
@@ -86,5 +101,8 @@ android {
     }
     kotlin {
         jvmToolchain(17)
+    }
+    dependencies {
+        debugImplementation(libs.compose.ui.tooling)
     }
 }
