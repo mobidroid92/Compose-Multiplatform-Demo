@@ -17,7 +17,7 @@ class CharactersPaginator(
     getNextKey = { characterDto ->
         var pageString: String? = null
         characterDto.info.next?.let { nextUrlNotNull ->
-            pageString = Uri.parse(nextUrlNotNull).getQueryParameter("page")
+            pageString = Uri.parse(nextUrlNotNull).getQueryParameter(PARAM_PAGE)
         }
         pageString?.toInt()
     },
@@ -29,3 +29,5 @@ class CharactersPaginator(
     onError = onError,
     onReachEnd = onReachEnd
 )
+
+const val PARAM_PAGE = "page"

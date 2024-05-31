@@ -16,5 +16,3 @@ sealed class OneShotOperationResult<T>(
     class Error<T>(data: T? = null, msg: String? = null, throwable: Throwable? = null) :
         OneShotOperationResult<T>(data = data, throwable = throwable, msg = msg)
 }
-
-class StreamOperationResult<T>(val flow: Flow<T>) : OperationResult<Flow<T>>

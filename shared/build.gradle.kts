@@ -1,7 +1,7 @@
 plugins {
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.cocoapods)
-    alias(libs.plugins.android.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlinx.serialization)
@@ -105,4 +105,9 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+
+compose.resources {
+    publicResClass = true
+    generateResClass = always
 }

@@ -39,6 +39,12 @@ import androidx.compose.ui.unit.dp
 import com.myapplication.providers.koinViewModel
 import com.myapplication.pressentation.uiModels.CharacterUiModel
 import com.seiko.imageloader.rememberImagePainter
+import myapplication.shared.generated.resources.Res
+import myapplication.shared.generated.resources.error_msg
+import myapplication.shared.generated.resources.retry
+import myapplication.shared.generated.resources.title
+import myapplication.shared.generated.resources.waiting_msg
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CharactersListScreen() {
@@ -46,7 +52,7 @@ fun CharactersListScreen() {
     val viewModel = koinViewModel<CharactersListViewModel>()
 
     val state = viewModel.state.collectAsState()
-    val title = "Compose Multiplatform"
+    val title = stringResource(Res.string.title)
 
     Scaffold(
         topBar = {
@@ -57,7 +63,7 @@ fun CharactersListScreen() {
             )
         }
     ) { paddingValues ->
-        ScreenContent(state, viewModel, paddingValues)
+        ScreenContent(state, viewModel::handleActions, paddingValues)
     }
 }
 
@@ -65,7 +71,7 @@ fun CharactersListScreen() {
 @Composable
 private fun ScreenContent(
     state: State<CharactersListUiState>,
-    viewModel: CharactersListViewModel,
+    onAction: (Actions) -> Unit,
     paddingValues: PaddingValues
 ) {
 
@@ -76,8 +82,8 @@ private fun ScreenContent(
     }
 
     val pullRefreshState = rememberPullRefreshState(
-        isShouldShowPullToRefreshIndicator.value,
-        { viewModel.getCharacters(isFullRefresh = true) }
+        refreshing = isShouldShowPullToRefreshIndicator.value,
+        onRefresh = { onAction(Actions.ReloadCharacters) }
     )
 
     Box(
@@ -89,21 +95,21 @@ private fun ScreenContent(
         LazyColumn(modifier = Modifier.fillMaxSize()) {
 
             items(count = state.value.charactersList.size) { index ->
-                handleLoadNextItems(index, state, viewModel)
-                RenderRow(index, state)
+                handleLoadNextItems(index, state, onAction)
+                RenderRow(state, index)
             }
 
             renderLoadMoreProgressItem(state)
 
-            renderErrorAndRetryItem(state, viewModel)
+            renderErrorAndRetryItem(state, onAction)
         }
 
         RenderWaiting(state, isShouldShowPullToRefreshIndicator)
 
         PullRefreshIndicator(
-            isShouldShowPullToRefreshIndicator.value,
-            pullRefreshState,
-            Modifier.align(Alignment.TopCenter)
+            refreshing = isShouldShowPullToRefreshIndicator.value,
+            state = pullRefreshState,
+            modifier = Modifier.align(Alignment.TopCenter)
         )
     }
 }
@@ -122,12 +128,12 @@ private fun LazyListScope.renderLoadMoreProgressItem(state: State<CharactersList
 
 private fun LazyListScope.renderErrorAndRetryItem(
     state: State<CharactersListUiState>,
-    viewModel: CharactersListViewModel
+    onAction: (Actions) -> Unit
 ) {
     if (state.value.isShowError && state.value.charactersList.isNotEmpty()) {
-        val errorMsg = "Loading data failed"
-        val retry = "retry"
         item {
+            val errorMsg = stringResource(Res.string.error_msg)
+            val retry = stringResource(Res.string.retry)
             Row(
                 modifier = Modifier.fillMaxWidth()
                     .wrapContentWidth(Alignment.CenterHorizontally),
@@ -138,7 +144,7 @@ private fun LazyListScope.renderErrorAndRetryItem(
                     text = errorMsg,
                 )
                 Button(
-                    onClick = { viewModel.getCharacters(false) }
+                    onClick = { onAction(Actions.LoadNextCharactersPage) }
                 ) {
                     Text(text = retry)
                 }
@@ -153,7 +159,7 @@ private fun RenderWaiting(
     isShouldShowPullToRefreshIndicator: State<Boolean>
 ) {
     if (isShouldShowPullToRefreshIndicator.value && state.value.charactersList.isEmpty()) {
-        val waitingMsg = "Waiting for items to load from server"
+        val waitingMsg = stringResource(Res.string.waiting_msg)
         Text(
             text = waitingMsg,
             modifier = Modifier.fillMaxSize()
@@ -164,8 +170,8 @@ private fun RenderWaiting(
 
 @Composable
 private fun RenderRow(
-    index: Int,
-    state: State<CharactersListUiState>
+    state: State<CharactersListUiState>,
+    index: Int
 ) {
     val item: CharacterUiModel = state.value.charactersList[index]
     CharacterItem(model = item)
@@ -207,9 +213,9 @@ private fun CharacterItem(model: CharacterUiModel) {
 private fun handleLoadNextItems(
     index: Int,
     state: State<CharactersListUiState>,
-    viewModel: CharactersListViewModel
+    onAction: (Actions) -> Unit
 ) {
     if (index == state.value.charactersList.lastIndex && state.value.isLoading.not()) {
-        viewModel.getCharacters(isFullRefresh = false)
+        onAction(Actions.LoadNextCharactersPage)
     }
 }

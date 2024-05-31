@@ -13,7 +13,7 @@ class CharactersRemoteDataSourceImpl(
 
     override suspend fun getCharactersByPageNumber(pageNumber: Int): OneShotOperationResult<CharacterDto> {
         return NetworkUtils.makeNetworkCall {
-            httpClient.get("character/?page=$pageNumber").body()
+            httpClient.get("character/?$PARAM_PAGE=$pageNumber").body()
         }
     }
 

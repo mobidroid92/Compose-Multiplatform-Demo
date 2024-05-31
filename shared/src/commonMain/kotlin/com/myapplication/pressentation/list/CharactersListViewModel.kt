@@ -50,10 +50,17 @@ class CharactersListViewModel(
     )
 
     init {
-        getCharacters(isFullRefresh = true)
+        handleActions(Actions.ReloadCharacters)
     }
 
-    fun getCharacters(isFullRefresh: Boolean = false) {
+    fun handleActions(action: Actions) {
+        when (action) {
+            Actions.ReloadCharacters -> getCharacters(isFullRefresh = true)
+            Actions.LoadNextCharactersPage -> getCharacters(isFullRefresh = false)
+        }
+    }
+
+    private fun getCharacters(isFullRefresh: Boolean) {
         scope.launch(ioDispatcher) {
             charactersPaginator.loadNextItems(isFullRefresh)
         }
@@ -61,3 +68,7 @@ class CharactersListViewModel(
 
 }
 
+sealed interface Actions {
+    data object ReloadCharacters : Actions
+    data object LoadNextCharactersPage : Actions
+}
