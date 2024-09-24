@@ -1,7 +1,7 @@
 ## Compose Multiplatform Demo
 This project is a Kotlin Multiplatform Mobile(KMM) demo that uses Compose to write a fully shared code between Android and Ios including UI.
 
-Becuase UI is 100% shared across platforms(Zero code written on IOS project), we have some limitations, like: we don't have access to regular Android api's/libraries like: ViewModel, Navigation, Hilt, Toast....
+Becuase UI is 100% shared across platforms(Zero code written on IOS project), we have some limitations, like we don't have access to regular Android api's/libraries.
 
 ## App Content
 This app will show a list of characters (Name and Image) of the television show Rick and Morty. 
@@ -15,7 +15,10 @@ This app will show a list of characters (Name and Image) of the television show 
 - Error item inside the list if api request failed that include a retry button.
 - VersionCatalog to manage dependencies.
 - Multiplatform resources.
-
+- ViewModel with Koin DI.
+- Type-safe compose navigation.
+- Shimmer Animation.
+- Shared-elements transition.
 
 ## Setup
 Before you run this project, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to ensure that your development environment is configured correctly:
@@ -59,6 +62,7 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 - [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader): to load images from url.
 - [Koin](https://github.com/InsertKoinIO/koin): to inject dependencies (DI).
 - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) to have Google's implementation of ViewModel.
+- [Compose Navigation](https://central.sonatype.com/artifact/org.jetbrains.androidx.navigation/navigation-compose) to have Jetbrains implementation of Compose Navigation
 
 ## Disclaimer
 - Project configurations is based on this [template](https://github.com/JetBrains/compose-multiplatform-ios-android-template#readme)
