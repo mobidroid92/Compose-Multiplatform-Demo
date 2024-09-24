@@ -26,7 +26,7 @@ class CharactersListViewModel(
                     isFullRefresh = isFullRefresh,
                     isShouldShowPullToRefreshIndicator = isLoading && isFullRefresh,
                     isShouldShowLoadMoreItem = isLoading && isFullRefresh.not(),
-                    isShouldShowEmptyPlaceholder = isLoading && isFullRefresh && it.charactersList.isEmpty(),
+                    isShouldShowLoadingShimmer = isLoading && isFullRefresh && it.charactersList.isEmpty(),
                     isShowErrorItem = false
                 )
             }
@@ -44,7 +44,7 @@ class CharactersListViewModel(
                     isFullRefresh = isFullRefresh,
                     isShouldShowPullToRefreshIndicator = false,
                     isShouldShowLoadMoreItem = false,
-                    isShouldShowEmptyPlaceholder = false,
+                    isShouldShowLoadingShimmer = false,
                     isShowErrorItem = false
                 )
             }
@@ -56,7 +56,7 @@ class CharactersListViewModel(
                     isFullRefresh = false,
                     isShouldShowPullToRefreshIndicator = false,
                     isShouldShowLoadMoreItem = false,
-                    isShouldShowEmptyPlaceholder = false,
+                    isShouldShowLoadingShimmer = false,
                     isShowErrorItem = it.charactersList.isNotEmpty()
                 )
             }

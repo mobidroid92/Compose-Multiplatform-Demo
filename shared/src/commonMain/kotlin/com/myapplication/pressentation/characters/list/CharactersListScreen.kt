@@ -4,18 +4,24 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
@@ -29,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -38,12 +45,10 @@ import com.myapplication.pressentation.characters.KEY_PREFIX_NAME
 import com.myapplication.pressentation.characters.uiModels.CharacterUiModel
 import com.myapplication.pressentation.common.errorAndRetryRow
 import com.myapplication.pressentation.common.loadMoreProgressRow
+import com.myapplication.pressentation.common.shimmerLoadingAnimation
 import com.myapplication.providers.koinViewModel
 import com.seiko.imageloader.rememberImagePainter
 import kotlinx.coroutines.flow.Flow
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.waiting_msg
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -91,33 +96,33 @@ private fun CharactersListScreen(
             modifier = Modifier.align(Alignment.TopCenter)
         )
 
-        if (uiState.isShouldShowEmptyPlaceholder) {
-            ShowWaitingPlaceholder()
-        }
+        if (uiState.isShouldShowLoadingShimmer) {
+            ShowLoadingShimmer()
+        } else {
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
 
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+                items(
+                    key = { index -> uiState.charactersList[index].id },
+                    count = uiState.charactersList.size
+                ) { index ->
+                    handleLoadMore(uiState, index, onAction)
+                    CharacterRow(
+                        index,
+                        uiState.charactersList,
+                        navController,
+                        sharedTransitionScope,
+                        animatedContentScope
+                    )
+                }
 
-            items(
-                key = { index -> uiState.charactersList[index].id },
-                count = uiState.charactersList.size
-            ) { index ->
-                handleLoadMore(uiState, index, onAction)
-                CharacterRow(
-                    index,
-                    uiState.charactersList,
-                    navController,
-                    sharedTransitionScope,
-                    animatedContentScope
-                )
-            }
+                if (uiState.isShouldShowLoadMoreItem) {
+                    loadMoreProgressRow()
+                }
 
-            if (uiState.isShouldShowLoadMoreItem) {
-                loadMoreProgressRow()
-            }
-
-            if (uiState.isShowErrorItem) {
-                errorAndRetryRow {
-                    onAction(Actions.LoadNextCharactersPage)
+                if (uiState.isShowErrorItem) {
+                    errorAndRetryRow {
+                        onAction(Actions.LoadNextCharactersPage)
+                    }
                 }
             }
         }
@@ -125,12 +130,39 @@ private fun CharactersListScreen(
 }
 
 @Composable
-private fun ShowWaitingPlaceholder() {
-    Text(
-        text = stringResource(Res.string.waiting_msg),
-        modifier = Modifier.fillMaxSize()
-            .wrapContentSize(Alignment.Center)
-    )
+private fun ShowLoadingShimmer() {
+    val scrollState = rememberScrollState()
+    Column(
+        modifier = Modifier.verticalScroll(
+            scrollState,
+            enabled = false
+        )
+    ) {
+        for (i in 1..10) {
+            Column {
+                Row(modifier = Modifier.padding(15.dp)) {
+                    Box(
+                        modifier = Modifier
+                            .width(50.dp)
+                            .height(50.dp)
+                            .clip(shape = CircleShape)
+                            .background(color = Color.LightGray)
+                            .shimmerLoadingAnimation()
+                    )
+                    Spacer(modifier = Modifier.width(15.dp))
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(40.dp)
+                            .clip(shape = RoundedCornerShape(10.dp))
+                            .background(color = Color.LightGray)
+                            .shimmerLoadingAnimation()
+                    )
+                }
+                Divider()
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalSharedTransitionApi::class)
