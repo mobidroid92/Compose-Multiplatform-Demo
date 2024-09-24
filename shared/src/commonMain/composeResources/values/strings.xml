@@ -3,4 +3,7 @@
     <string name="error_msg">Loading data failed</string>
     <string name="waiting_msg">Waiting for items to load from server</string>
     <string name="retry">retry</string>
+    <string name="list_screen">List</string>
+    <string name="details_screen">Details</string>
+    <string name="welcome">Welcome!</string>
 </resources>

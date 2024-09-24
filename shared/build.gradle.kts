@@ -56,6 +56,9 @@ kotlin {
             //Koin
             implementation(libs.bundles.koin.common)
 
+            //Navigation
+            implementation(libs.jetbrains.compose.navigation)
+
         }
         androidMain.dependencies {
             //Coroutine

@@ -1,6 +1,6 @@
 package com.myapplication.model.dto
 
-import com.myapplication.pressentation.uiModels.CharacterUiModel
+import com.myapplication.pressentation.characters.uiModels.CharacterUiModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

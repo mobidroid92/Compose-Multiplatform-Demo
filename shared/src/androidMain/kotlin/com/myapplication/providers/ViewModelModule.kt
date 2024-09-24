@@ -1,16 +1,18 @@
 package com.myapplication.providers
 
-import com.myapplication.pressentation.list.CharactersListViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.qualifier.named
+import com.myapplication.pressentation.characters.CharactersParentViewModel
+import com.myapplication.pressentation.characters.list.CharactersListViewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 actual val viewModelModule = module {
     viewModel {
         CharactersListViewModel(
-            get(),
-            get(named(APPLICATION_SCOPE)),
-            get(named(IO_DISPATCHER))
+            get()
         )
+    }
+
+    viewModel {
+        CharactersParentViewModel()
     }
 }

@@ -1,19 +1,18 @@
 [versions]
-agp = "8.3.2" #Also check gradle.properties
-kotlin = "2.0.0" #Also check gradle.properties
-coroutines = "1.8.1"
-ktor = "2.3.11"
-compose-multiplatform = "1.6.10" #Also check gradle.properties
-compose-android = "1.6.7"
-lifecycle = "2.8.0"
-#compose-navigation = "2.8.0-beta01"
-activity = "1.9.0"
-kotlinx-serialization-json = "1.6.3"
-image-loader = "1.7.8"
+agp = "8.5.2" #Also check gradle.properties
+kotlin = "2.0.20" #Also check gradle.properties
+coroutines = "1.9.0"
+ktor = "2.3.12"
+compose-multiplatform = "1.7.0-beta02" #Also check gradle.properties
+compose-android = "1.7.2"
+jetbrains-lifecycle = "2.8.2"
+jetbrains-compose-navigation = "2.8.0-alpha10"
+activity = "1.9.2"
+kotlinx-serialization-json = "1.7.3"
+image-loader = "1.8.1"
 appcompat = "1.7.0"
 androidx-core = "1.13.1"
-koin = "3.5.6"
-koin-compose = "1.1.5"
+koin = "4.0.0"
 
 
 [libraries]
@@ -31,18 +30,18 @@ ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-android" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-android" }
 
-#compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
+jetbrains-compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrains-compose-navigation" }
 
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 
-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "jetbrains-lifecycle" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "jetbrains-lifecycle" }
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 
 image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader" }
 
@@ -66,4 +65,3 @@ compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin"  }
-#navigation-SafeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "compose-navigation" }

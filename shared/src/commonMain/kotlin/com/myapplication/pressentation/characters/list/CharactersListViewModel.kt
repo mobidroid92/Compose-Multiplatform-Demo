@@ -1,20 +1,17 @@
-package com.myapplication.pressentation.list
+package com.myapplication.pressentation.characters.list
 
 import androidx.lifecycle.ViewModel
-import com.myapplication.model.dto.toCharacterUiModelList
+import androidx.lifecycle.viewModelScope
 import com.myapplication.model.dataSource.CharactersPaginator
+import com.myapplication.model.dto.toCharacterUiModelList
 import com.myapplication.model.repostries.CharactersRepository
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CharactersListViewModel(
-    charactersRepository: CharactersRepository,
-    private val scope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher
+    charactersRepository: CharactersRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CharactersListUiState())
@@ -24,7 +21,14 @@ class CharactersListViewModel(
         charactersRepository = charactersRepository,
         onLoadUpdated = { isLoading, isFullRefresh ->
             _state.update {
-                it.copy(isLoading = isLoading, isFullRefresh = isFullRefresh)
+                it.copy(
+                    isLoading = isLoading,
+                    isFullRefresh = isFullRefresh,
+                    isShouldShowPullToRefreshIndicator = isLoading && isFullRefresh,
+                    isShouldShowLoadMoreItem = isLoading && isFullRefresh.not(),
+                    isShouldShowEmptyPlaceholder = isLoading && isFullRefresh && it.charactersList.isEmpty(),
+                    isShowErrorItem = false
+                )
             }
         },
         onSuccess = { characterDto, isFullRefresh ->
@@ -38,13 +42,23 @@ class CharactersListViewModel(
                         )
                     },
                     isFullRefresh = isFullRefresh,
-                    isShowError = false
+                    isShouldShowPullToRefreshIndicator = false,
+                    isShouldShowLoadMoreItem = false,
+                    isShouldShowEmptyPlaceholder = false,
+                    isShowErrorItem = false
                 )
             }
         },
         onError = {
             _state.update {
-                it.copy(isShowError = true)
+                it.copy(
+                    isLoading = false,
+                    isFullRefresh = false,
+                    isShouldShowPullToRefreshIndicator = false,
+                    isShouldShowLoadMoreItem = false,
+                    isShouldShowEmptyPlaceholder = false,
+                    isShowErrorItem = it.charactersList.isNotEmpty()
+                )
             }
         }
     )
@@ -61,7 +75,7 @@ class CharactersListViewModel(
     }
 
     private fun getCharacters(isFullRefresh: Boolean) {
-        scope.launch(ioDispatcher) {
+        viewModelScope.launch {
             charactersPaginator.loadNextItems(isFullRefresh)
         }
     }
