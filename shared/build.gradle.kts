@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.cocoapods)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose)
@@ -61,12 +62,6 @@ kotlin {
 
         }
         androidMain.dependencies {
-            //Coroutine
-            api(libs.coroutines.android)
-
-            //Views
-            api(libs.bundles.androidx)
-
             //Ktor
             implementation(libs.ktor.client.cio)
 

@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.myapplication.providers.koinViewModel
+import com.myapplication.di.koinViewModel
 import kotlinx.coroutines.flow.StateFlow
 
 const val KEY_PREFIX_NAME = "name"

@@ -1,4 +1,4 @@
-package com.myapplication.providers
+package com.myapplication.di
 
 import com.myapplication.common.BuildConfig
 import io.ktor.client.HttpClient
@@ -14,7 +14,7 @@ import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-actual fun getHttpClient() = HttpClient(CIO) {
+actual fun createHttpClient() = HttpClient(CIO) {
 
         expectSuccess = true
 

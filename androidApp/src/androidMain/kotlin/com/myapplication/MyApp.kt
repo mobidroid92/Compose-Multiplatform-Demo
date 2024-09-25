@@ -1,7 +1,7 @@
 package com.myapplication
 
 import android.app.Application
-import com.myapplication.providers.initKoin
+import com.myapplication.di.initKoin
 
 class MyApp : Application() {
 

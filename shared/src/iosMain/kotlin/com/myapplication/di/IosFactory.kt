@@ -1,4 +1,4 @@
-package com.myapplication.providers
+package com.myapplication.di
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.darwin.Darwin
@@ -12,7 +12,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.util.PlatformUtils
 import kotlinx.serialization.json.Json
 
-actual fun getHttpClient() = HttpClient(Darwin) {
+actual fun createHttpClient() = HttpClient(Darwin) {
 
         expectSuccess = true
 

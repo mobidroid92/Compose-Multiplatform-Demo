@@ -1,8 +1,8 @@
 package com.myapplication.pressentation
 
 import androidx.compose.ui.window.ComposeUIViewController
-import com.myapplication.providers.appModule
-import com.myapplication.providers.viewModelModule
+import com.myapplication.di.modules.dataModule
+import com.myapplication.di.modules.viewModelModule
 import org.koin.core.context.startKoin
 
 fun MainViewController() = ComposeUIViewController(
@@ -13,6 +13,6 @@ fun MainViewController() = ComposeUIViewController(
 
 private fun initKoin() {
     startKoin {
-        modules(appModule, viewModelModule)
+        modules(dataModule, viewModelModule)
     }
 }

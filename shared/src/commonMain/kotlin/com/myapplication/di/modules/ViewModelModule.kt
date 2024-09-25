@@ -1,4 +1,4 @@
-package com.myapplication.providers
+package com.myapplication.di.modules
 
 import org.koin.core.module.Module
 

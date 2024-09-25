@@ -39,6 +39,6 @@ android {
         jvmToolchain(17)
     }
     dependencies {
-        //Nothing
+        implementation(libs.bundles.androidx)
     }
 }
