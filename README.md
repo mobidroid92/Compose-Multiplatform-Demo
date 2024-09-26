@@ -19,6 +19,7 @@ This app will show a list of characters (Name and Image) of the television show 
 - Type-safe compose navigation.
 - Shimmer Animation.
 - Shared-elements transition.
+- Offline cache by database (Room)
 
 ## Setup
 Before you run this project, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to ensure that your development environment is configured correctly:
@@ -63,6 +64,7 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 - [Koin](https://github.com/InsertKoinIO/koin): to inject dependencies (DI).
 - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) to have Google's implementation of ViewModel.
 - [Compose Navigation](https://central.sonatype.com/artifact/org.jetbrains.androidx.navigation/navigation-compose) to have Jetbrains implementation of Compose Navigation
+- [Room](https://developer.android.com/jetpack/androidx/releases/room) to have offline cache.
 
 ## Disclaimer
 - Project configurations is based on this [template](https://github.com/JetBrains/compose-multiplatform-ios-android-template#readme)
