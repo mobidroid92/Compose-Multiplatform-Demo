@@ -1,6 +1,6 @@
-package com.myapplication.model.dataSource
+package com.myapplication.model.network.dataSource
 
-import com.myapplication.model.dto.CharacterDto
+import com.myapplication.model.network.dto.CharacterDto
 import com.myapplication.model.utils.OneShotOperationResult
 
 fun interface CharactersRemoteDataSource {

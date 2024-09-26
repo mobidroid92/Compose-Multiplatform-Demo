@@ -1,11 +1,11 @@
-package com.myapplication.model.dataSource
+package com.myapplication.model.network.dataSource
 
+import com.myapplication.model.network.dto.CharacterDto
 import com.myapplication.model.utils.NetworkUtils
 import com.myapplication.model.utils.OneShotOperationResult
-import com.myapplication.model.dto.CharacterDto
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
 
 class CharactersRemoteDataSourceImpl(
     private val httpClient: HttpClient
@@ -13,8 +13,11 @@ class CharactersRemoteDataSourceImpl(
 
     override suspend fun getCharactersByPageNumber(pageNumber: Int): OneShotOperationResult<CharacterDto> {
         return NetworkUtils.makeNetworkCall {
-            httpClient.get("character/?$PARAM_PAGE=$pageNumber").body()
+            httpClient.get("$CHARACTERS_PATH/?$PARAM_PAGE=$pageNumber").body()
         }
     }
 
+    companion object {
+        const val CHARACTERS_PATH = "character"
+    }
 }

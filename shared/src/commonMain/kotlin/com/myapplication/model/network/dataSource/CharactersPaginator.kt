@@ -1,10 +1,10 @@
-package com.myapplication.model.dataSource
+package com.myapplication.model.network.dataSource
 
 import com.eygraber.uri.Uri
-import com.myapplication.model.utils.OneShotOperationResult
-import com.myapplication.model.dto.CharacterDto
+import com.myapplication.model.network.dto.CharacterDto
 import com.myapplication.model.repostries.CharactersRepository
 import com.myapplication.model.utils.NetworkPaginator
+import com.myapplication.model.utils.OneShotOperationResult
 
 class CharactersPaginator(
     charactersRepository: CharactersRepository,

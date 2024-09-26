@@ -1,7 +1,5 @@
 package com.myapplication.model.utils
 
-import kotlinx.coroutines.flow.Flow
-
 interface OperationResult<T>
 
 sealed class OneShotOperationResult<T>(

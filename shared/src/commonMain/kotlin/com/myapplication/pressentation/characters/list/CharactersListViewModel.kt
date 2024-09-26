@@ -2,8 +2,7 @@ package com.myapplication.pressentation.characters.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.myapplication.model.dataSource.CharactersPaginator
-import com.myapplication.model.dto.toCharacterUiModelList
+import com.myapplication.model.network.dataSource.CharactersPaginator
 import com.myapplication.model.repostries.CharactersRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CharactersListViewModel(
-    charactersRepository: CharactersRepository
+    private val charactersRepository: CharactersRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CharactersListUiState())
@@ -32,15 +31,13 @@ class CharactersListViewModel(
             }
         },
         onSuccess = { characterDto, isFullRefresh ->
+            if (isFullRefresh) {
+                charactersRepository.clearCharactersDb()
+            }
+            charactersRepository.insertCharactersToDb(characterDto.results)
+
             _state.update {
                 it.copy(
-                    charactersList = if (isFullRefresh) {
-                        characterDto.results.toCharacterUiModelList()
-                    } else {
-                        it.charactersList.plus(
-                            characterDto.results.toCharacterUiModelList()
-                        )
-                    },
                     isFullRefresh = isFullRefresh,
                     isShouldShowPullToRefreshIndicator = false,
                     isShouldShowLoadMoreItem = false,
@@ -64,6 +61,7 @@ class CharactersListViewModel(
     )
 
     init {
+        loadCharactersFromDb()
         handleActions(Actions.ReloadCharacters)
     }
 
@@ -71,6 +69,18 @@ class CharactersListViewModel(
         when (action) {
             Actions.ReloadCharacters -> getCharacters(isFullRefresh = true)
             Actions.LoadNextCharactersPage -> getCharacters(isFullRefresh = false)
+        }
+    }
+
+    private fun loadCharactersFromDb() {
+        viewModelScope.launch {
+            charactersRepository.getCharactersFlowFromDb().collect { list ->
+                _state.update {
+                    it.copy(
+                        charactersList = list
+                    )
+                }
+            }
         }
     }
 

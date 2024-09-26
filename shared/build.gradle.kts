@@ -60,6 +60,11 @@ kotlin {
             //Navigation
             implementation(libs.jetbrains.compose.navigation)
 
+            //Room
+            implementation(libs.room.runtime)
+
+            //Sqlite
+            implementation(libs.sqlite.bundled)
         }
         androidMain.dependencies {
             //Ktor
@@ -103,6 +108,12 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+
+dependencies {
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
 }
 
 compose.resources {

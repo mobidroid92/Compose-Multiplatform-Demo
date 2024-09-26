@@ -1,6 +1,6 @@
-package com.myapplication.model.dto
+package com.myapplication.model.network.dto
 
-import com.myapplication.pressentation.characters.uiModels.CharacterUiModel
+import com.myapplication.model.local.database.CharactersEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -22,16 +22,16 @@ data class CharacterItem(
 
 )
 
-fun CharacterItem.toCharacterUiModel(): CharacterUiModel {
-    return CharacterUiModel(
+fun CharacterItem.toCharactersEntity(): CharactersEntity {
+    return CharactersEntity(
         id = id,
         name = name,
         image = image
     )
 }
 
-fun List<CharacterItem>?.toCharacterUiModelList(): List<CharacterUiModel> {
+fun List<CharacterItem>?.toCharacterEntityList(): List<CharactersEntity> {
     return this?.map { characterItem ->
-        characterItem.toCharacterUiModel()
+        characterItem.toCharactersEntity()
     } ?: emptyList()
 }
