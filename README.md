@@ -1,8 +1,6 @@
 ## Compose Multiplatform Demo
 This project is a Kotlin Multiplatform Mobile(KMM) demo that uses Compose to write a fully shared code between Android and Ios including UI.
 
-Becuase UI is 100% shared across platforms(Zero code written on IOS project), we have some limitations, like we don't have access to regular Android api's/libraries.
-
 ## App Content
 This app will show a list of characters (Name and Image) of the television show Rick and Morty. 
 
