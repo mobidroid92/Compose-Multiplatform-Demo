@@ -3,7 +3,6 @@ package com.myapplication.pressentation.characters.list
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -39,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import coil3.compose.AsyncImage
 import com.myapplication.di.koinViewModel
 import com.myapplication.pressentation.characters.CharactersGraph
 import com.myapplication.pressentation.characters.KEY_PREFIX_IMAGE
@@ -47,7 +47,6 @@ import com.myapplication.pressentation.characters.uiModels.CharacterUiModel
 import com.myapplication.pressentation.common.errorAndRetryRow
 import com.myapplication.pressentation.common.loadMoreProgressRow
 import com.myapplication.pressentation.common.shimmerLoadingAnimation
-import com.seiko.imageloader.rememberImagePainter
 import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -212,8 +211,8 @@ private fun CharacterItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         with(sharedTransitionScope) {
-            Image(
-                painter = rememberImagePainter(model.image),
+            AsyncImage(
+                model = model.image,
                 contentDescription = null,
                 modifier = Modifier
                     .sharedElement(

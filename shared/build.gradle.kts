@@ -33,23 +33,20 @@ kotlin {
         commonMain.dependencies {
             //Compose
             implementation(compose.runtime)
-            implementation(compose.foundation)
+            api(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
             //Coroutine
-            api(libs.coroutines.core)
+            implementation(libs.coroutines.core)
 
             //Ktor
             implementation(libs.bundles.ktor.common)
 
             //Kotlinx-Serialization
-            api(libs.kotlinx.serialization.json)
-
-            //Image Loader
-            api(libs.image.loader)
+            implementation(libs.kotlinx.serialization.json)
 
             //ViewModel
             implementation(libs.bundles.lifecycle)
@@ -65,6 +62,12 @@ kotlin {
 
             //Sqlite
             implementation(libs.sqlite.bundled)
+
+            //Coil
+            implementation(libs.bundles.coil)
+
+            //Uri
+            implementation(libs.uri.kmp)
         }
         androidMain.dependencies {
             //Ktor

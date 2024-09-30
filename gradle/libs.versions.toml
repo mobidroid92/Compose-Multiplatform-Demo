@@ -10,12 +10,13 @@ jetbrains-lifecycle = "2.8.2"
 jetbrains-compose-navigation = "2.8.0-alpha10"
 activity = "1.9.2"
 kotlinx-serialization-json = "1.7.3"
-image-loader = "1.8.1"
 appcompat = "1.7.0"
 androidx-core = "1.13.1"
 koin = "4.0.0"
 room = "2.7.0-alpha08"
 sqlite-bundled = "2.5.0-alpha08"
+coil3 = "3.0.0-alpha10"
+uri-kmp = "0.0.18"
 
 
 [libraries]
@@ -28,6 +29,10 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+
+coil-core = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor2", version.ref = "coil3" }
 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-android" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-android" }
@@ -45,7 +50,7 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 
-image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader" }
+uri-kmp = { module = "com.eygraber:uri-kmp", version.ref = "uri-kmp" }
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
@@ -57,6 +62,7 @@ androidx = ["activity-compose", "appcompat", "androidx-core"]
 lifecycle = ["lifecycle-runtime-compose", "lifecycle-viewmodel-compose"]
 ktor-common = ["ktor-core", "ktor-serialization", "ktor-negotiation", "ktor-logging"]
 koin-common = ["koin-core", "koin-compose"]
+coil = ["coil-core", "coil-compose", "coil-network-ktor"]
 
 
 [plugins]
@@ -71,4 +77,4 @@ compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-m
 compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin"  }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin" }

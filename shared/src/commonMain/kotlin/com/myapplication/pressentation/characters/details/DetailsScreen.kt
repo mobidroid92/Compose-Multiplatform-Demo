@@ -3,7 +3,6 @@ package com.myapplication.pressentation.characters.details
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,9 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.myapplication.pressentation.characters.KEY_PREFIX_IMAGE
 import com.myapplication.pressentation.characters.KEY_PREFIX_NAME
-import com.seiko.imageloader.rememberImagePainter
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -47,8 +46,8 @@ fun DetailsScreenRoot(
                     .padding(top = 40.dp)
             )
 
-            Image(
-                painter = rememberImagePainter(imageUrl),
+            AsyncImage(
+                model = imageUrl,
                 contentDescription = "Character Image",
                 modifier = Modifier
                     .sharedElement(
@@ -58,7 +57,6 @@ fun DetailsScreenRoot(
                     .padding(top = 20.dp)
                     .size(200.dp)
                     .clip(RoundedCornerShape(10.dp))
-
             )
         }
 

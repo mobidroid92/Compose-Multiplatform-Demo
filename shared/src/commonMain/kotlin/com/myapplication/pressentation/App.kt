@@ -6,15 +6,30 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.setSingletonImageLoaderFactory
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import coil3.request.CachePolicy
+import coil3.util.DebugLogger
 import com.myapplication.pressentation.characters.CharactersGraph
 import com.myapplication.pressentation.characters.CharactersParentRoot
 import com.myapplication.pressentation.welcome.WelcomeGraph
 import com.myapplication.pressentation.welcome.WelcomeScreenRoot
+import okio.FileSystem
 import org.koin.compose.KoinContext
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun App() {
     MaterialTheme {
+
+        setSingletonImageLoaderFactory { context ->
+            getAsyncImageLoader(context)
+        }
+
         KoinContext {
 
             val navController = rememberNavController()
@@ -39,3 +54,19 @@ private fun AppLaunchNavigationStack(navController: NavHostController) {
         }
     }
 }
+
+private fun getAsyncImageLoader(context: PlatformContext) =
+    ImageLoader.Builder(context).memoryCachePolicy(CachePolicy.ENABLED).memoryCache {
+        MemoryCache.Builder().maxSizePercent(context, MAX_MEMORY_CACHE_PERCENT).strongReferencesEnabled(true).build()
+    }.diskCachePolicy(CachePolicy.ENABLED).networkCachePolicy(CachePolicy.ENABLED).diskCache {
+        newDiskCache()
+    }.logger(DebugLogger()).build()
+
+private fun newDiskCache(): DiskCache {
+    return DiskCache.Builder().directory(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "image_cache")
+        .maxSizeBytes(MAX_DISK_CACHE_SIZE)
+        .build()
+}
+
+private const val MAX_DISK_CACHE_SIZE = 1024L * 1024 * 512 // 512MB
+private const val MAX_MEMORY_CACHE_PERCENT = 0.3 // 1/3 of the available memory
