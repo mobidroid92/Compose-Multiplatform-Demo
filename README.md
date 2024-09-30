@@ -61,15 +61,15 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 - [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader): to load images from url.
 - [Koin](https://github.com/InsertKoinIO/koin): to inject dependencies (DI).
 - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) to have Google's implementation of ViewModel.
-- [Compose Navigation](https://central.sonatype.com/artifact/org.jetbrains.androidx.navigation/navigation-compose) to have Jetbrains implementation of Compose Navigation
+- [Compose Navigation](https://central.sonatype.com/artifact/org.jetbrains.androidx.navigation/navigation-compose) to have JetBrains implementation of Compose Navigation
 - [Room](https://developer.android.com/jetpack/androidx/releases/room) to have offline cache.
 
 ## Disclaimer
-- Project configurations is based on this [template](https://github.com/JetBrains/compose-multiplatform-ios-android-template#readme)
-- Kindly note that Compose Multiplatform is still in alpha, so it is subject to change and may require manual migration proceess when it is released.
+- Project configurations are based on this [template](https://github.com/JetBrains/compose-multiplatform-ios-android-template#readme)
+- Kindly note that Compose Multiplatform is still in alpha, so it is subject to change and may require a manual migration process when it is released.
 
 ## Let me know!
-If you have any questions or suggestion please contact me on malbdour92@gmail.com
+If you have any questions or suggestions please contact me at malbdour92@gmail.com
 
 ## About
 Find me on LinkedIn: https://www.linkedin.com/in/mobidroid92/
