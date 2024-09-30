@@ -18,6 +18,7 @@ This app will show a list of characters (Name and Image) of the television show 
 - Shimmer Animation.
 - Shared-elements transition.
 - Offline cache by database (Room)
+- Memory & Disk image caching (Coil)
 
 ## Setup
 Before you run this project, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to ensure that your development environment is configured correctly:
@@ -63,6 +64,7 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) to have Google's implementation of ViewModel.
 - [Compose Navigation](https://central.sonatype.com/artifact/org.jetbrains.androidx.navigation/navigation-compose) to have JetBrains implementation of Compose Navigation
 - [Room](https://developer.android.com/jetpack/androidx/releases/room) to have offline cache.
+- [Coil](https://github.com/coil-kt/coil) loading & caching images.
 
 ## Disclaimer
 - Project configurations are based on this [template](https://github.com/JetBrains/compose-multiplatform-ios-android-template#readme)
