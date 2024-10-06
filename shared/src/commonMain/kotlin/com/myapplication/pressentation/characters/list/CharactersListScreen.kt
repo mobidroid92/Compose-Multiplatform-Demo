@@ -137,7 +137,7 @@ private fun ShowLoadingShimmer() {
             enabled = false
         )
     ) {
-        for (i in 1..10) {
+        repeat(10) {
             Column {
                 Row(modifier = Modifier.padding(15.dp)) {
                     Box(
