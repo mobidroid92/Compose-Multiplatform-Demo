@@ -1,3 +1,5 @@
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=mobidroid92_Compose-Multiplatform-Demo)
+
 ## Compose Multiplatform Demo
 This project is a Kotlin Multiplatform Mobile(KMM) demo that uses Compose to write a fully shared code between Android and Ios including UI.
 
