@@ -128,10 +128,6 @@ private fun CharactersListScreen(
     }
 }
 
-fun sum(a: Int, b: Int): Int {
-    return a + b
-}
-
 @Composable
 private fun ShowLoadingShimmer() {
     val scrollState = rememberScrollState()
