@@ -4,6 +4,15 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.sonarqube)
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", extra["sonar.projectKey"] as String)
+        property("sonar.organization", extra["sonar.organization"] as String)
+        property("sonar.host.url", extra["sonar.host.url"] as String)
+    }
 }
 
 kotlin {

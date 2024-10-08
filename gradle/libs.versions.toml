@@ -17,6 +17,7 @@ room = "2.7.0-alpha08"
 sqlite-bundled = "2.5.0-alpha08"
 coil3 = "3.0.0-alpha10"
 uri-kmp = "0.0.18"
+sonar = "5.1.0.4882"
 
 
 [libraries]
@@ -78,3 +79,5 @@ compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin" }
+
+sonarqube = { id = "org.sonarqube",  version.ref = "sonar" }
